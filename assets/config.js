@@ -1,6 +1,6 @@
 window.config = Object.assign(window.config || {}, {
   realm: '5a8d7ce7a302eb3601fdef2c',
-  sale: '0xaee0eb707a23fee852c43b5eb22030a25a729937',
+  sale: '0xf76350f0ad6b7cfce1311ef43e2eef488fd16dad',
   common: {
     contactEmail: 'pr@et4.io',
     termsOfServiceURL: 'terms.url',
@@ -26,23 +26,17 @@ window.config = Object.assign(window.config || {}, {
       title: 'Sale Timeline:',
       steps: [
         {
-          date: '30 Jan',
+          date: '5 March',
           text: '1 ET4 = 1/1000 ETH',
           percent: '40%',
-          isActive: false,
+          isActive: true,
         },
         {
-          date: '1 Feb',
-          text: 'Pre Sale',
+          date: '30 March',
+          text: 'Sale',
           percent: 'ended',
           isActive: false,
-        },
-        {
-          date: '5 March',
-          text: 'Sale',
-          percent: 'up to 25%',
-          isActive: false,
-        },
+        }
       ],
     },
   ],
