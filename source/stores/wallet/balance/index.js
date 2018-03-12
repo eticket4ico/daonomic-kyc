@@ -1,6 +1,6 @@
 import { observable, computed, action, autorun, runInAction } from 'mobx';
 import dataStates from '~/utils/data-states';
-import apiAdapter from '~/api/api';
+import apiAdapter from '~/api';
 import kyc from '~/stores/kyc';
 
 export class WalletBalanceStore {
@@ -28,7 +28,7 @@ export class WalletBalanceStore {
     autorun(() => {
       clearInterval(balanceUpdateIntervalId);
 
-      if (this.kyc.isSaved) {
+      if (this.kyc.isAllowed) {
         this.loadBalance();
         balanceUpdateIntervalId = setInterval(
           () => this.loadBalance(),

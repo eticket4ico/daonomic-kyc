@@ -1,5 +1,5 @@
 import { when } from 'mobx';
-import mockedApi from '~/api/api.mock';
+import mockedApi from '~/api/mock';
 import { AuthStore } from './';
 
 describe('auth store', () => {
@@ -64,6 +64,25 @@ describe('auth store', () => {
           authStore.isRegistered === false &&
           authStore.errors.email !== '',
         done,
+      );
+    });
+
+    test('registration data reset', (done) => {
+      mockedApi.auth.register.setResponse('success');
+      const authStore = new AuthStore({
+        api: mockedApi,
+      });
+
+      authStore.register({ email: testEmail });
+      expect(authStore.isLoading).toBe(true);
+
+      when(
+        () => authStore.isLoading === false && authStore.isRegistered === true,
+        () => {
+          authStore.resetRegistrationData();
+          expect(authStore.isRegistered).toBe(false);
+          done();
+        },
       );
     });
   });

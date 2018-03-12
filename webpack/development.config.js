@@ -1,12 +1,14 @@
 const webpack = require('webpack');
 const baseConfig = require('./base.config');
-const { assetsDir, themeImportDeclaration } = require('../config');
+const {
+  devServerPort,
+  assetsDir,
+  themeImportDeclaration,
+} = require('../config');
 
-module.exports = {
-  ...baseConfig,
-
+module.exports = Object.assign({}, baseConfig, {
   entry: [
-    'webpack-dev-server/client?http://localhost:3000',
+    `webpack-dev-server/client?http://localhost:${devServerPort}`,
     'webpack/hot/only-dev-server',
 
     ...baseConfig.entry,
@@ -19,8 +21,7 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
   ],
 
-  module: {
-    ...baseConfig.module,
+  module: Object.assign({}, baseConfig.module, {
     rules: [
       ...baseConfig.module.rules,
       {
@@ -43,13 +44,13 @@ module.exports = {
         ],
       },
     ],
-  },
+  }),
 
   devServer: {
     host: 'localhost',
-    port: 3000,
+    port: devServerPort,
     historyApiFallback: true,
     hot: true,
     contentBase: assetsDir,
   },
-};
+});
